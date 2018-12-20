@@ -5,22 +5,17 @@ Simple case:
   position in 0..n-1 and swap our value
 */
 
-function randomizeArray(array, low = 0, high = array.length) {
-  if (high - low <= 1) {
-    return array;
+function shuffleArrayIterative(array) {
+  for (let i = 1; i < array.length; i += 1) {
+    const randomPostion = Math.floor(Math.random() * (i + 1 - Number.EPSILON));
+
+    const temp = array[randomPostion];
+    array[randomPostion] = array[i];
+    array[i] = temp;
   }
-
-  const shuffled = randomizeArray(array, 0, high - 1);
-
-  const positionToShuffle = Math.floor(Math.random() * high);
-
-  const temp = shuffled[positionToShuffle];
-  shuffled[positionToShuffle] = array[high - 1];
-  shuffled[high - 1] = temp;
-
-  return shuffled;
+  return array;
 }
 
 if (require.main === module) {
-  console.log(randomizeArray([1, 2, 3, 4, 5]));
+  console.log(shuffleArrayIterative([1, 2, 3, 4, 5]));
 }
